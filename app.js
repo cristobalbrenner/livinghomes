@@ -330,7 +330,7 @@ const quoteHTML = `
 
       <div class="quote-contacts">
         <div class="qc-row"><span class="k">Call</span><a href="tel:+15555550130">(703) 555-0130</a></div>
-        <div class="qc-row"><span class="k">Email</span><a href="mailto:hello@livinghomes.build">hello@livinghomes.build</a></div>
+        <div class="qc-row"><span class="k">Email</span><a href="mailto:hello@livinghomesva.com">hello@livinghomesva.com</a></div>
         <div class="qc-row"><span class="k">Visit</span><span>14201 Sullyfield Cir, Chantilly VA 20151</span></div>
         <div class="qc-row"><span class="k">Hours</span><span>Mon–Fri · 7am – 6pm · Sat by appt.</span></div>
       </div>
@@ -541,7 +541,7 @@ const footHTML = `
       <div class="foot-col">
         <h5>Contact</h5>
         <ul>
-          <li>(703) 555-0130</li><li>hello@livinghomes.build</li><li>Chantilly, VA 20151</li>
+          <li>(703) 555-0130</li><li>hello@livinghomesva.com</li><li>Chantilly, VA 20151</li>
         </ul>
       </div>
     </div>

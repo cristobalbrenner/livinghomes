@@ -48,5 +48,5 @@ Allow: /
 User-agent: Meta-ExternalAgent
 Allow: /
 
-Sitemap: https://livinghomes.build/sitemap.xml
-Host: https://livinghomes.build
+Sitemap: https://livinghomesva.com/sitemap.xml
+Host: https://livinghomesva.com
