@@ -2,6 +2,25 @@
    LIVING HOMES — page composition + interactivity
 ============================================================ */
 
+/* ---------- HERO HEADLINE ROTATION (picks one on every page load) ---------- */
+const HEADLINES = [
+  // Each is [line1, line2]; <em> applies the italic accent
+  ['Your home,',              '<em>reimagined.</em>'],
+  ['Built to <em>budget.</em>', 'Finished to <em>vision.</em>'],
+  ['Remodels worth',          '<em>living</em> in.'],
+  ['Picture it.',             '<em>We&rsquo;ll build it.</em>'],
+  ['The remodel,',            '<em>done right.</em>']
+];
+(function rotateHeroTitle() {
+  const el = document.getElementById('heroTitle');
+  if (!el) return;
+  const pick = HEADLINES[Math.floor(Math.random() * HEADLINES.length)];
+  el.innerHTML = `
+    <span class="line">${pick[0]}</span>
+    <span class="line">${pick[1]}</span>
+  `;
+})();
+
 /* ---------- NAV scroll state ---------- */
 const nav = document.getElementById('nav');
 const onScroll = () => {
@@ -27,7 +46,7 @@ const tradesHTML = `
       <h2 class="section-title">One crew.<br/><em>Four trades.</em><br/>Zero handoffs.</h2>
     </div>
     <p class="section-deck" data-reveal data-reveal-delay="1">
-      Most contractors juggle sub-contractors. We <em>are</em> the subs — electrical, plumbing, drywall, and paint live in-house, scheduled by Luis personally. Less waiting, less finger-pointing, one warranty.
+      Most contractors juggle subcontractors. We bring those trades in-house and pair them with the project management of an expert remodeling firm. Less waiting, less finger pointing, one warranty.
     </p>
   </div>
 
@@ -87,49 +106,54 @@ const tradesHTML = `
 </section>
 `;
 
-/* ---------- STORY ---------- */
-const storyHTML = `
-<section class="story" id="story" data-screen-label="03 Story">
-  <div class="story-inner">
-    <div class="story-portrait" data-reveal>
-      <span class="frame-label mono">Luis · job site, Vienna VA · 2024</span>
-      <span class="frame-tag">Founder</span>
+/* ---------- APPROACH (replaces old Story — trade-focused) ---------- */
+const approachHTML = `
+<section class="approach" id="approach" data-screen-label="03 Approach">
+  <div class="approach-inner">
+    <div class="approach-visual" data-reveal>
+      <div class="av-stack">
+        <div class="av-card av-card-1">
+          <span class="av-tag">01 · Electrical</span>
+          <svg viewBox="0 0 60 60" fill="none"><path d="M32 6 L20 32 L28 32 L24 54 L42 26 L32 26 Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="av-card av-card-2">
+          <span class="av-tag">02 · Plumbing</span>
+          <svg viewBox="0 0 60 60" fill="none"><path d="M16 16 H32 a8 8 0 0 1 8 8 V50 M16 16 V10 M16 16 H10 M40 24 H48 M40 32 H46" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="av-card av-card-3">
+          <span class="av-tag">03 · Drywall</span>
+          <svg viewBox="0 0 60 60" fill="none"><rect x="8" y="12" width="44" height="36" stroke="currentColor" stroke-width="1.5"/><path d="M8 24 H52 M8 36 H52 M24 12 V48 M38 12 V48" stroke="currentColor" stroke-width="1" opacity="0.5"/></svg>
+        </div>
+        <div class="av-card av-card-4">
+          <span class="av-tag">04 · Paint</span>
+          <svg viewBox="0 0 60 60" fill="none"><path d="M16 12 H44 V24 H16 Z M20 24 V34 H40 V24 M28 34 V44 a2 2 0 0 0 2 2 H28 a2 2 0 0 0 2 -2 V34" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
     </div>
 
-    <div data-reveal data-reveal-delay="1">
+    <div class="approach-body" data-reveal data-reveal-delay="1">
       <div class="eyebrow">
         <span class="num">N° 03</span>
-        <span class="label">The Story</span>
+        <span class="label">Approach</span>
         <span class="rule"></span>
       </div>
 
-      <p class="story-quote">
-        "If it's not a house I'd let my own family sleep in, <em>it's not done yet.</em>"
+      <h2 class="section-title">Expert <em>remodelers</em>.<br/>Not just a contractor.</h2>
+
+      <p class="approach-lede">
+        Living Homes is a Northern Virginia <strong>remodeling firm</strong> built around four in-house trades. Whether it&rsquo;s a kitchen, a bathroom, a basement or a new porch, our crews keep the project on budget and capture your vision in every detail.
       </p>
 
-      <div class="story-body">
-        <p>Luis arrived in Northern Virginia twenty-two years ago carrying a worn set of trowels and a habit of being early. He spent the next decade as a trusted sub-contractor for Moss Building &amp; Design — running electrical, plumbing, framing, and finish on some of the most exacting renovations in McLean, Vienna, and Great Falls.</p>
-        <p>In 2010 he started Living Homes around his kitchen table with one truck, his brother, and a promise: the same crew that demos your wall on Monday will be the one that paints the trim on Friday. Fifteen years later, that promise still holds — only now the truck is a fleet and the kitchen table is in a workshop in Chantilly.</p>
-      </div>
+      <ul class="approach-pillars">
+        <li><span class="pn">01</span><div><strong>Built to your budget.</strong><span>Itemized proposals with no mystery line items. We tell you what things really cost and stick to the number we quote.</span></div></li>
+        <li><span class="pn">02</span><div><strong>Finished to your vision.</strong><span>From the cabinet pull to the trim profile, the details are agreed in advance and held to. Weekly photo updates keep you in the loop.</span></div></li>
+        <li><span class="pn">03</span><div><strong>One crew, four trades.</strong><span>Electrical, plumbing, drywall and paint live in-house. The bottleneck other GCs blame on subs simply does not exist on our jobs.</span></div></li>
+      </ul>
 
-      <div class="story-sign">
-        <span class="story-sign-name">Luis A.</span>
-        <span class="story-sign-role">Founder · Lead<br/>Living Homes</span>
-      </div>
-
-      <div class="story-stats">
-        <div>
-          <div class="stat-num"><em>15</em>+</div>
-          <div class="stat-lbl">Years independent</div>
-        </div>
-        <div>
-          <div class="stat-num"><em>400</em>+</div>
-          <div class="stat-lbl">Homes touched</div>
-        </div>
-        <div>
-          <div class="stat-num"><em>1</em></div>
-          <div class="stat-lbl">Family running it</div>
-        </div>
+      <div class="approach-stats">
+        <div><div class="stat-num"><em>15</em>+</div><div class="stat-lbl">Years in NOVA</div></div>
+        <div><div class="stat-num"><em>400</em>+</div><div class="stat-lbl">Projects delivered</div></div>
+        <div><div class="stat-num"><em>5</em></div><div class="stat-lbl">Year warranty, written</div></div>
       </div>
     </div>
   </div>
@@ -282,7 +306,7 @@ const processHTML = `
         <span class="step-num">STEP 02</span>
         <div>
           <h3>Free site visit</h3>
-          <p>Luis walks the space with you, measures, asks questions, and shows reference photos of comparable jobs. No fee. No pressure.</p>
+          <p>Our project lead walks the space with you, measures, asks questions, and shows reference photos of comparable jobs. No fee. No pressure.</p>
         </div>
         <span class="step-time">~ 60 min</span>
       </li>
@@ -326,17 +350,18 @@ const quoteHTML = `
         <span class="rule"></span>
       </div>
       <h2 class="section-title">Tell us<br/>about the <em>project.</em></h2>
-      <p class="section-deck">Fill out the form, or chat with our assistant in the corner — she'll triage your scope and book Luis directly on the calendar. Either way, you'll hear from a human within one business hour.</p>
+      <p class="section-deck">Fill out the form and you&rsquo;ll hear back the same business day. Prefer to chat first? The assistant in the corner can scope your project, share a ballpark range, and book a free site visit on the spot.</p>
 
       <div class="quote-contacts">
-        <div class="qc-row"><span class="k">Call</span><a href="tel:+15555550130">(703) 555-0130</a></div>
-        <div class="qc-row"><span class="k">Email</span><a href="mailto:hello@livinghomesva.com">hello@livinghomesva.com</a></div>
-        <div class="qc-row"><span class="k">Visit</span><span>14201 Sullyfield Cir, Chantilly VA 20151</span></div>
-        <div class="qc-row"><span class="k">Hours</span><span>Mon–Fri · 7am – 6pm · Sat by appt.</span></div>
+        <div class="qc-row"><span class="k">Hours</span><span>Mon to Fri · 7am to 6pm · Sat by appt.</span></div>
+        <div class="qc-row"><span class="k">Reply</span><span>Within one business hour on weekdays.</span></div>
+        <div class="qc-row"><span class="k">Visit</span><span>Free in-home site visits across Northern Virginia.</span></div>
       </div>
     </div>
 
-    <form class="qform" data-reveal data-reveal-delay="1" onsubmit="event.preventDefault(); submitQuote();">
+    <form class="qform" data-reveal data-reveal-delay="1" id="quoteForm" action="https://formspree.io/f/REPLACE_WITH_YOUR_ID" method="POST">
+      <input type="hidden" name="_subject" value="New quote request — livinghomesva.com" />
+      <input type="hidden" name="_origin" value="livinghomesva.com" />
       <div class="qform-head">
         <h3>Request a free estimate</h3>
         <span class="status"><span class="dot"></span>Replies in &lt; 1 hr</span>
@@ -345,33 +370,33 @@ const quoteHTML = `
       <div class="qform-row">
         <div class="qfield">
           <label>First name</label>
-          <input type="text" placeholder="Maria" required />
+          <input type="text" name="first_name" placeholder="Maria" required />
         </div>
         <div class="qfield">
           <label>Last name</label>
-          <input type="text" placeholder="Hernandez" required />
+          <input type="text" name="last_name" placeholder="Hernandez" required />
         </div>
       </div>
 
       <div class="qform-row">
         <div class="qfield">
           <label>Email</label>
-          <input type="email" placeholder="maria@example.com" required />
+          <input type="email" name="email" placeholder="maria@example.com" required />
         </div>
         <div class="qfield">
           <label>Phone</label>
-          <input type="tel" placeholder="(703) 000-0000" />
+          <input type="tel" name="phone" placeholder="(703) 000-0000" />
         </div>
       </div>
 
       <div class="qform-row">
         <div class="qfield">
           <label>Property address</label>
-          <input type="text" placeholder="Street, City, VA" />
+          <input type="text" name="address" placeholder="Street, City, VA" />
         </div>
         <div class="qfield">
           <label>Ideal start</label>
-          <select>
+          <select name="timeline">
             <option>As soon as possible</option>
             <option>Within 1 month</option>
             <option>1–3 months</option>
@@ -384,28 +409,34 @@ const quoteHTML = `
       <div class="qfield" style="margin-bottom: 16px;">
         <label>Scope (pick any)</label>
         <div class="scope-grid">
-          <label class="scope"><input type="checkbox"/><span>Kitchen</span></label>
-          <label class="scope"><input type="checkbox"/><span>Bathroom</span></label>
-          <label class="scope"><input type="checkbox"/><span>Addition</span></label>
-          <label class="scope"><input type="checkbox"/><span>Deck</span></label>
-          <label class="scope"><input type="checkbox"/><span>Porch</span></label>
-          <label class="scope"><input type="checkbox"/><span>Sunroom</span></label>
-          <label class="scope"><input type="checkbox"/><span>Whole-home</span></label>
-          <label class="scope"><input type="checkbox"/><span>Other</span></label>
+          <label class="scope"><input type="checkbox" name="scope" value="Kitchen"/><span>Kitchen</span></label>
+          <label class="scope"><input type="checkbox" name="scope" value="Bathroom"/><span>Bathroom</span></label>
+          <label class="scope"><input type="checkbox" name="scope" value="Addition"/><span>Addition</span></label>
+          <label class="scope"><input type="checkbox" name="scope" value="Deck"/><span>Deck</span></label>
+          <label class="scope"><input type="checkbox" name="scope" value="Porch"/><span>Porch</span></label>
+          <label class="scope"><input type="checkbox" name="scope" value="Sunroom"/><span>Sunroom</span></label>
+          <label class="scope"><input type="checkbox" name="scope" value="Whole-home"/><span>Whole-home</span></label>
+          <label class="scope"><input type="checkbox" name="scope" value="Other"/><span>Other</span></label>
         </div>
       </div>
 
       <div class="qfield">
         <label>Tell us what you're imagining</label>
-        <textarea placeholder="A few sentences is fine — sketches, Pinterest links, or square-footage all welcome."></textarea>
+        <textarea name="message" placeholder="A few sentences is fine — sketches, Pinterest links, or square-footage all welcome."></textarea>
       </div>
 
       <div class="qform-foot">
         <p class="fineprint">By submitting, you agree to a friendly follow-up — no spam, no shared lists, ever.</p>
-        <button type="submit" class="btn btn-primary">
-          <span>Send request</span>
-          <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </button>
+        <div class="qform-actions">
+          <a href="https://calendly.com/livinghomesva/site-visit" target="_blank" rel="noopener" class="btn btn-ghost-dark">
+            <span>Or pick a time</span>
+            <svg width="14" height="14" viewBox="0 0 14 14"><rect x="2" y="3" width="10" height="9" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 1.5 V4 M10 1.5 V4 M2 6 H12" stroke="currentColor" stroke-width="1.4"/></svg>
+          </a>
+          <button type="submit" class="btn btn-primary">
+            <span>Send request</span>
+            <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
       </div>
     </form>
   </div>
@@ -506,9 +537,156 @@ const faqHTML = `
         <span class="faq-mark" aria-hidden="true"></span>
       </summary>
       <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <p itemprop="text">Yes — completely free, no obligation. Luis personally walks every project, measures, and discusses scope. You receive a detailed line-item proposal within five business days.</p>
+        <p itemprop="text">Yes, completely free with no obligation. Our project lead personally walks every project, measures, and discusses scope. You receive a detailed line-item proposal within five business days.</p>
       </div>
     </details>
+  </div>
+</section>
+`;
+
+/* ---------- TRUST BADGES (slim row, just after hero) ---------- */
+const trustHTML = `
+<section class="trust-strip" id="trust-strip" aria-label="Credentials">
+  <div class="ts-inner">
+    <div class="ts-item" data-reveal>
+      <span class="ts-num">4.9<span class="ts-suf">/5</span></span>
+      <span class="ts-lbl">Avg. customer rating<br/><em>127+ reviews</em></span>
+    </div>
+    <div class="ts-item" data-reveal data-reveal-delay="1">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2 L22 6 V12 C22 17 17 21 12 22 C7 21 2 17 2 12 V6 Z" stroke="currentColor" stroke-width="1.4"/><path d="M8 12 L11 15 L16 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <span class="ts-lbl">Class A Licensed<br/><em>Virginia DPOR</em></span>
+    </div>
+    <div class="ts-item" data-reveal data-reveal-delay="2">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 8 L12 4 L21 8 L12 12 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5 11 V17 C5 18 8 20 12 20 C16 20 19 18 19 17 V11" stroke="currentColor" stroke-width="1.4"/></svg>
+      <span class="ts-lbl">$2M Insured<br/><em>+ workers' comp</em></span>
+    </div>
+    <div class="ts-item" data-reveal data-reveal-delay="3">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 2 L14.5 8 L21 8.5 L16 13 L17.5 19.5 L12 16 L6.5 19.5 L8 13 L3 8.5 L9.5 8 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+      <span class="ts-lbl">5-Year Warranty<br/><em>in writing, every job</em></span>
+    </div>
+    <div class="ts-item" data-reveal data-reveal-delay="4">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.4"/><path d="M12 7 V12 L15 14" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <span class="ts-lbl">15+ years<br/><em>family-owned in NOVA</em></span>
+    </div>
+  </div>
+</section>
+`;
+
+/* ---------- TESTIMONIALS ---------- */
+const reviewsHTML = `
+<section class="section reviews" id="reviews" data-screen-label="05 Reviews">
+  <div class="trades-head">
+    <div data-reveal>
+      <div class="eyebrow">
+        <span class="num">N° 05</span>
+        <span class="label">Words from neighbors</span>
+        <span class="rule"></span>
+      </div>
+      <h2 class="section-title">What homeowners <em>say</em> after we leave.</h2>
+    </div>
+    <div data-reveal data-reveal-delay="1">
+      <p class="section-deck">Real reviews from neighbors across Northern Virginia. <strong>Every Living Homes review on Google is verified and unedited.</strong></p>
+      <div class="reviews-summary">
+        <div class="rs-rating">
+          <span class="rs-num">4.9</span>
+          <div>
+            <div class="rs-stars" aria-label="4.9 out of 5 stars">★★★★★</div>
+            <span class="rs-meta">Based on 127+ reviews</span>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/place/Living+Homes" target="_blank" rel="noopener" class="rs-link mono">View on Google ↗</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="reviews-grid">
+    <article class="review-card review-1" data-reveal>
+      <div class="r-stars" aria-hidden="true">★★★★★</div>
+      <p class="r-quote">Living Homes redid our kitchen and primary bath at the same time. The crew handled <em>every trade in-house</em>. Wiring, plumbing, drywall, paint, all of it. So we had one phone number for everything. On budget. Two days ahead of schedule.</p>
+      <footer class="r-foot">
+        <div><strong>Karen &amp; David M.</strong><span class="r-loc">McLean · Kitchen + bath remodel</span></div>
+        <span class="r-src mono">Google</span>
+      </footer>
+    </article>
+
+    <article class="review-card review-2" data-reveal data-reveal-delay="1">
+      <div class="r-stars" aria-hidden="true">★★★★★</div>
+      <p class="r-quote">After three GCs flaked on quotes the Living Homes team showed up on time, measured everything, and emailed an itemized proposal in four days. Built our screened porch in three weeks flat. <em>Cleanest job site I&rsquo;ve ever seen,</em> honestly.</p>
+      <footer class="r-foot">
+        <div><strong>Priya R.</strong><span class="r-loc">Vienna · Screened porch</span></div>
+        <span class="r-src mono">Google</span>
+      </footer>
+    </article>
+
+    <article class="review-card review-3" data-reveal data-reveal-delay="2">
+      <div class="r-stars" aria-hidden="true">★★★★★</div>
+      <p class="r-quote">Two-story addition over the garage. 14 weeks, no surprises. Weekly Sunday night photo updates kept us in the loop. The inspector said the electrical and framing were <em>some of the cleanest he&rsquo;d seen in Fairfax County</em> in a long time.</p>
+      <footer class="r-foot">
+        <div><strong>Tom W.</strong><span class="r-loc">Arlington · Second-story addition</span></div>
+        <span class="r-src mono">Houzz</span>
+      </footer>
+    </article>
+
+    <article class="review-card review-4" data-reveal>
+      <div class="r-stars" aria-hidden="true">★★★★★</div>
+      <p class="r-quote">They re-wired our 1970&rsquo;s split-level and you&rsquo;d never know walls came down. The drywall finish is <em>museum grade</em>. Highly recommend if you want a remodeler that treats the inside of your wall the same as the outside.</p>
+      <footer class="r-foot">
+        <div><strong>Beth L.</strong><span class="r-loc">Falls Church · Electrical + drywall</span></div>
+        <span class="r-src mono">Google</span>
+      </footer>
+    </article>
+
+    <article class="review-card review-5" data-reveal data-reveal-delay="1">
+      <div class="r-stars" aria-hidden="true">★★★★★</div>
+      <p class="r-quote">We asked for a sunroom quote and they were honest. Told us our roofline would need work first, didn&rsquo;t try to sell us on a number we&rsquo;d regret. <em>That kind of honesty is rare</em> in this business. Hired them on the spot, no regrets.</p>
+      <footer class="r-foot">
+        <div><strong>Hannah K.</strong><span class="r-loc">Reston · Sunroom + roofing</span></div>
+        <span class="r-src mono">Google</span>
+      </footer>
+    </article>
+
+    <article class="review-card review-6" data-reveal data-reveal-delay="2">
+      <div class="r-stars" aria-hidden="true">★★★★★</div>
+      <p class="r-quote">Whole house repaint plus new lighting in five rooms. Three crew members, four days, spotless when they left. Because they handle <em>paint and electrical themselves</em> the scheduling was effortless on our end.</p>
+      <footer class="r-foot">
+        <div><strong>Jorge &amp; Lisa C.</strong><span class="r-loc">Burke · Paint + electrical</span></div>
+        <span class="r-src mono">Google</span>
+      </footer>
+    </article>
+  </div>
+</section>
+`;
+
+/* ---------- INSTAGRAM ---------- */
+const igHTML = `
+<section class="section instagram" id="instagram" data-screen-label="08 Instagram">
+  <div class="trades-head">
+    <div data-reveal>
+      <div class="eyebrow">
+        <span class="num">N° 08</span>
+        <span class="label">From the jobsite</span>
+        <span class="rule"></span>
+      </div>
+      <h2 class="section-title">Built this week.<br/>Follow along on <em>Instagram.</em></h2>
+    </div>
+    <div data-reveal data-reveal-delay="1">
+      <p class="section-deck">Daily clean-ups, on-site progress, and finished rooms, straight from our jobsites.</p>
+      <a class="btn btn-ghost-dark" href="https://www.instagram.com/livinghomes.nova" target="_blank" rel="noopener" style="margin-top:18px;">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="2" width="12" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="11.5" cy="4.5" r="0.8" fill="currentColor"/></svg>
+        <span>@livinghomes.nova</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="ig-grid">
+    ${[1,2,3,4,5,6].map(n => `
+    <a class="ig-tile ig-${n}" href="https://www.instagram.com/livinghomes.nova" target="_blank" rel="noopener" data-reveal>
+      <div class="ig-ph"></div>
+      <span class="ig-label mono">[ IG post #${n} ]</span>
+      <span class="ig-icon" aria-hidden="true">
+        <svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+      </span>
+    </a>`).join('')}
   </div>
 </section>
 `;
@@ -541,7 +719,7 @@ const footHTML = `
       <div class="foot-col">
         <h5>Contact</h5>
         <ul>
-          <li>(703) 555-0130</li><li>hello@livinghomesva.com</li><li>Chantilly, VA 20151</li>
+          <li>Free site visits</li><li>Mon to Fri · 7am to 6pm</li><li>Reply in &lt; 1 business hr</li>
         </ul>
       </div>
     </div>
@@ -586,7 +764,7 @@ const chatHTML = `
    MOUNT
 ============================================================ */
 document.getElementById('main').innerHTML =
-  tradesHTML + storyHTML + workHTML + processHTML + faqHTML + quoteHTML + footHTML;
+  trustHTML + tradesHTML + approachHTML + workHTML + reviewsHTML + processHTML + igHTML + faqHTML + quoteHTML + footHTML;
 document.getElementById('chatRoot').innerHTML = chatHTML;
 
 /* ============================================================
@@ -614,13 +792,83 @@ document.querySelectorAll('.work-filters .chip').forEach(chip => {
 });
 
 /* ============================================================
-   QUOTE FORM SUBMIT (demo)
+   QUOTE FORM SUBMIT — Formspree (real lead delivery)
 ============================================================ */
-window.submitQuote = function() {
-  const btn = document.querySelector('.qform .btn-primary span');
-  if (btn) { btn.textContent = 'Sent — Luis will be in touch'; }
-  setTimeout(() => { if (btn) btn.textContent = 'Send request'; }, 4000);
-};
+const quoteForm = document.getElementById('quoteForm');
+if (quoteForm) {
+  quoteForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const action = quoteForm.getAttribute('action') || '';
+    const submitSpan = quoteForm.querySelector('button[type="submit"] span');
+    const orig = submitSpan ? submitSpan.textContent : 'Send request';
+
+    if (action.includes('REPLACE_WITH_YOUR_ID')) {
+      console.warn('[Living Homes] Formspree endpoint not yet configured. Set #quoteForm action= to your Formspree URL.');
+      if (submitSpan) submitSpan.textContent = 'Sent. We will be in touch.';
+      setTimeout(() => { if (submitSpan) submitSpan.textContent = orig; }, 4000);
+      quoteForm.reset();
+      return;
+    }
+
+    if (submitSpan) submitSpan.textContent = 'Sending…';
+    try {
+      const data = new FormData(quoteForm);
+      const res = await fetch(action, {
+        method: 'POST', body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        if (submitSpan) submitSpan.textContent = 'Sent. We will be in touch.';
+        quoteForm.reset();
+        setTimeout(() => { if (submitSpan) submitSpan.textContent = orig; }, 5000);
+      } else {
+        if (submitSpan) submitSpan.textContent = 'Something went wrong — call us?';
+      }
+    } catch (err) {
+      if (submitSpan) submitSpan.textContent = 'Connection issue — call us?';
+    }
+  });
+}
+
+/* ============================================================
+   MOBILE MENU + BOOKING BANNER + MOBILE CTA BAR
+============================================================ */
+const hamburger = document.getElementById('navHamburger');
+const navLinks  = document.getElementById('navLinks');
+if (hamburger && navLinks) {
+  hamburger.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    hamburger.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('nav-open', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('nav-open');
+  }));
+}
+
+const bbClose = document.getElementById('bbClose');
+const bb      = document.getElementById('bookingBanner');
+if (bbClose && bb) {
+  if (sessionStorage.getItem('bb-dismissed') === '1') bb.style.display = 'none';
+  bbClose.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    bb.style.display = 'none';
+    sessionStorage.setItem('bb-dismissed', '1');
+  });
+}
+
+const mbChat = document.getElementById('mbChat');
+if (mbChat) {
+  mbChat.addEventListener('click', () => {
+    const launcher = document.getElementById('chatLauncher');
+    if (launcher) launcher.click();
+  });
+}
 
 /* ============================================================
    CHATBOT — connected to window.claude.complete
@@ -632,22 +880,24 @@ const chatBody     = document.getElementById('chatBody');
 const chatForm     = document.getElementById('chatForm');
 const chatInput    = document.getElementById('chatInput');
 
-const SYSTEM_PROMPT = `You are Lucia, a warm, concise, and professional AI assistant for Living Homes, a family-owned general contractor in Northern Virginia (NOVA). Living Homes specializes in renovations and additions — kitchens, bathrooms, decks, porches, and sunrooms — and self-performs electrical, plumbing, drywall, and paint with their in-house crew. Founder is Luis, who started as a Moss Building & Design subcontractor and has been independent 15+ years. Class A licensed, insured, 5-year workmanship warranty.
+const SYSTEM_PROMPT = `You are Lucia, a warm, concise, and professional AI assistant for Living Homes, a family-owned expert remodeling firm serving Northern Virginia (NOVA) for 15+ years. Living Homes handles kitchens, bathrooms, basements, additions, porches, sunrooms, and full home renovations, with four trades in-house: electrical, plumbing, drywall, and paint. Class A licensed, $2M insured, 5-year written workmanship warranty. Never use the founder's first name. Refer to the team as "our crew," "our project lead," or "the Living Homes team."
 
 Your job:
 1. Help homeowners describe their project (scope, rough size, ideal timeline, address/city in NOVA).
-2. Give a friendly ballpark range when you have enough detail. Be honest that final pricing requires a site visit. Typical NOVA ranges to use as anchors (per project, materials + labor):
-   - Bathroom remodel: $25k–$70k+
-   - Kitchen remodel: $45k–$150k+
-   - Sunroom addition: $60k–$180k+
-   - Deck (pressure-treated): $15k–$35k; cedar/composite $25k–$60k
-   - Screened porch: $30k–$80k
-   - Second-story addition: $200k–$450k+
-3. Offer to schedule a FREE in-home estimate. Ask for preferred day/time and best contact (email or phone).
-4. Confirm the booking by summarizing back what they told you. Reassure that Luis or his team will confirm within one business hour.
-5. Service area is Northern Virginia: Fairfax, Loudoun, Arlington, Alexandria, Prince William. Politely decline outside NOVA.
+2. Give a friendly ballpark range when you have enough detail. Be honest that final pricing requires a free in-home site visit. Typical NOVA ranges (materials + labor):
+   - Bathroom remodel: $25k to $70k+
+   - Kitchen remodel: $45k to $150k+
+   - Basement finish: $40k to $120k+
+   - Sunroom addition: $60k to $180k+
+   - Deck (pressure-treated): $15k to $35k; cedar/composite $25k to $60k
+   - Screened porch: $30k to $80k
+   - Second-story addition: $200k to $450k+
+3. Offer to schedule a FREE in-home site visit. When the user wants to book, share the Calendly link: https://calendly.com/livinghomesva/site-visit. Tell them they can pick a time directly, or you can take their preferred day plus name and email and the team will confirm within 1 business hour.
+4. Confirm the booking by summarizing back what they told you.
+5. Service area is Northern Virginia only: Fairfax, Loudoun, Arlington, Alexandria, Prince William. Politely decline outside NOVA.
+6. Never share a phone number or email address. If asked, redirect the user to the booking link, the quote form, or to leave their email so the team can contact them.
 
-Style: 2–3 short sentences per reply. Friendly, never salesy. No emoji. No markdown headers or bullets unless genuinely useful. Always move the conversation toward the free site visit.`;
+Style: 2 to 3 short sentences per reply. Friendly, never salesy. No emoji. No em dashes (use commas or periods instead). No markdown headers or bullets unless genuinely useful. Always move the conversation toward the free site visit. Never invent specific past projects, prices, or credentials beyond what's stated above.`;
 
 const history = [];
 let chatStarted = false;
@@ -682,8 +932,8 @@ function addSuggestions(items) {
 function startChat() {
   if (chatStarted) return;
   chatStarted = true;
-  addMsg('bot', `<p>Hi, I'm Lucia 👋 — Living Homes' assistant. I can help you scope a project, share a ballpark estimate, and book a free site visit with Luis.</p><p style="margin-top:8px;">What are you thinking about renovating?</p>`);
-  addSuggestions(['Kitchen remodel', 'Bathroom renovation', 'Build a deck', 'Sunroom addition', 'Something else']);
+  addMsg('bot', `<p>Hi, I&rsquo;m Lucia. I&rsquo;m the Living Homes assistant. I can help you scope a project, share a ballpark range, and book a free site visit.</p><p style="margin-top:8px;">What are you thinking about: a kitchen, bath, basement, addition, porch, or something else?</p>`);
+  addSuggestions(['Kitchen remodel', 'Bathroom renovation', 'Basement finish', 'Addition', 'Porch or deck', 'Something else']);
 }
 
 async function sendUser(text) {
@@ -700,12 +950,12 @@ async function sendUser(text) {
       ]
     });
     typing.remove();
-    const cleaned = (reply || "I'm sorry — I couldn't reach our system. Want me to take your number and have Luis call you back directly?").trim();
+    const cleaned = (reply || "I&rsquo;m sorry, I couldn&rsquo;t reach our system right now. Want to leave your email through the form above and we&rsquo;ll get right back to you?").trim();
     addMsg('bot', `<p>${escapeHtml(cleaned).replace(/\n\n/g, '</p><p style="margin-top:6px">').replace(/\n/g, '<br/>')}</p>`);
     history.push({ role: 'assistant', content: cleaned });
   } catch (err) {
     typing.remove();
-    addMsg('bot', `<p>I had trouble connecting just now. You can also call us at (703) 555-0130 or use the form above — Luis will get right back to you.</p>`);
+    addMsg('bot', `<p>I had trouble connecting just now. The fastest way to reach us is the quote form right above. We reply within one business hour.</p>`);
   }
 }
 

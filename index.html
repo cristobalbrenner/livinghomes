@@ -75,12 +75,6 @@
       "image": "https://livinghomesva.com/og-cover.jpg",
       "description": "Family-owned general contractor serving Northern Virginia for over 15 years. High-end renovations and additions specializing in kitchens, bathrooms, decks, porches, and sunrooms. In-house electrical, plumbing, drywall, and paint crews.",
       "foundingDate": "2010",
-      "founder": {
-        "@type": "Person",
-        "name": "Luis A.",
-        "jobTitle": "Founder & Lead Contractor",
-        "description": "Founder of Living Homes. Previously a long-time trusted subcontractor for Moss Building & Design before going independent in 2010."
-      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "14201 Sullyfield Cir",
@@ -94,7 +88,7 @@
         "latitude": 38.8943,
         "longitude": -77.4311
       },
-      "telephone": "+1-703-555-0130",
+      "telephone": "+1-703-469-0590",
       "email": "hello@livinghomesva.com",
       "priceRange": "$$$",
       "currenciesAccepted": "USD",
@@ -256,7 +250,7 @@
           "name": "Is the initial site visit and quote really free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Founder Luis personally walks every project, measures, and discusses scope at no cost and with no obligation. You receive a detailed line-item proposal within five business days."
+            "text": "Yes. Our project lead personally walks every project, measures, and discusses scope at no cost and with no obligation. You receive a detailed line-item proposal within five business days."
           }
         }
       ]
@@ -274,6 +268,22 @@
 <body>
 
 <!-- ============================================================
+     BOOKING BANNER (gentle urgency)
+============================================================ -->
+<div class="booking-banner" id="bookingBanner">
+  <div class="bb-inner">
+    <span class="bb-pulse" aria-hidden="true"></span>
+    <span class="bb-text">
+      <strong>Booking summer &amp; fall 2026 projects</strong>
+      <span class="bb-sep">·</span>
+      <span class="bb-cta">Reserve a free site visit →</span>
+    </span>
+    <a href="#quote" class="bb-link" aria-label="Reserve a free site visit"></a>
+    <button class="bb-close" aria-label="Dismiss" id="bbClose">×</button>
+  </div>
+</div>
+
+<!-- ============================================================
      NAV
 ============================================================ -->
 <nav class="nav" id="nav">
@@ -284,17 +294,20 @@
     </svg>
     <span><em>Living</em> Homes</span>
   </a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#trades">Trades</a></li>
     <li><a href="#work">Work</a></li>
-    <li><a href="#story">Story</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#reviews">Reviews</a></li>
     <li><a href="#process">Process</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#quote">Free quote</a></li>
   </ul>
   <a href="#quote" class="nav-cta">
-    <span class="dot"></span>Start a project
+    <span class="dot"></span>Free quote
   </a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- ============================================================
@@ -327,13 +340,13 @@
       <span class="tick"></span>
     </div>
 
-    <h1 class="hero-title">
-      <span class="line"><em>Homes</em> built</span>
-      <span class="line">to be <em>lived</em> in.</span>
+    <h1 class="hero-title" id="heroTitle">
+      <span class="line">Your home,</span>
+      <span class="line"><em>reimagined.</em></span>
     </h1>
 
     <p class="hero-deck">
-      Renovations, additions, kitchens, baths, decks, porches &amp; sunrooms — wired, plumbed, framed, and finished by the same family-led crew for fifteen years.
+      Expert remodelers across Northern Virginia. Kitchens, bathrooms, basements, porches and additions, built to budget and finished to your vision in every last detail.
     </p>
 
     <div class="hero-cta-row">
@@ -350,11 +363,11 @@
     <div class="hero-foot">
       <div class="hero-foot-col">
         <span class="mono">A —</span>
-        <p>Electrical · Plumbing · Drywall · Paint, in one crew.</p>
+        <p>Class A licensed · $2M insured · 5-year warranty.</p>
       </div>
       <div class="hero-foot-col">
         <span class="mono">B —</span>
-        <p>Licensed &amp; insured across Fairfax, Loudoun, Arlington &amp; Prince William.</p>
+        <p>Serving Fairfax, Loudoun, Arlington &amp; Prince William.</p>
       </div>
       <div class="hero-foot-col">
         <span class="mono">C —</span>
@@ -374,6 +387,17 @@
 
 <!-- Floating chatbot launcher -->
 <div id="chatRoot"></div>
+
+<!-- Sticky mobile call/chat bar -->
+<div class="mobile-bar" id="mobileBar" role="region" aria-label="Quick contact">
+  <button class="mb-btn mb-chat" id="mbChat">
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7l-4 3v-3a2 2 0 0 1-1-1.7V4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+    <span>Chat &amp; quote</span>
+  </button>
+  <a href="#quote" class="mb-btn mb-quote">
+    <span>Free estimate →</span>
+  </a>
+</div>
 
 <!-- Section partials are loaded then inlined. -->
 <script src="app.js"></script>
