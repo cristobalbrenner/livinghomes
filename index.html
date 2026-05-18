@@ -317,7 +317,10 @@
   <div class="hero-video">
     <!-- Real footage drops in here. Falls back to an animated placeholder.
          Drop one or more <source> tags pointing to MP4/WEBM masters. -->
-    <video autoplay muted loop playsinline id="heroVideo" preload="metadata" data-src-hint="Drop a 16:9 hero clip here (e.g. /assets/hero.mp4)"></video>
+    <video autoplay muted loop playsinline id="heroVideo" preload="metadata">
+      <!-- Step 3: uncomment and set the path once your video file is in the repo -->
+      <!-- <source src="assets/hero.mp4" type="video/mp4"> -->
+    </video>
     <div class="hero-video-placeholder" aria-hidden="true">
       <div class="hp-grain"></div>
       <div class="hp-bands">

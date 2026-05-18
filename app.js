@@ -978,3 +978,16 @@ chatForm.addEventListener('submit', e => {
   chatInput.value = '';
   sendUser(v);
 });
+
+/* ============================================================
+   HERO VIDEO — hide placeholder once video can play
+============================================================ */
+(function initHeroVideo() {
+  const video = document.getElementById('heroVideo');
+  const placeholder = document.querySelector('.hero-video-placeholder');
+  if (!video || !placeholder) return;
+  const hide = () => { placeholder.style.opacity = '0'; placeholder.style.pointerEvents = 'none'; };
+  video.addEventListener('canplaythrough', hide, { once: true });
+  // Also catch the case where the video is already ready (cached)
+  if (video.readyState >= 3) hide();
+})();
