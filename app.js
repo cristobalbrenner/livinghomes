@@ -987,7 +987,8 @@ chatForm.addEventListener('submit', e => {
   const placeholder = document.querySelector('.hero-video-placeholder');
   if (!video || !placeholder) return;
   const hide = () => { placeholder.style.opacity = '0'; placeholder.style.pointerEvents = 'none'; };
-  video.addEventListener('canplaythrough', hide, { once: true });
-  // Also catch the case where the video is already ready (cached)
-  if (video.readyState >= 3) hide();
+  video.addEventListener('canplay', hide, { once: true });
+  video.addEventListener('playing', hide, { once: true });
+  // Catch already-ready state (e.g. cached video)
+  if (video.readyState >= 2) hide();
 })();
