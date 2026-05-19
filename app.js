@@ -836,12 +836,19 @@ if (quoteForm) {
 const hamburger = document.getElementById('navHamburger');
 const navLinks  = document.getElementById('navLinks');
 if (hamburger && navLinks) {
+  const positionMenu = () => {
+    navLinks.style.top = nav.getBoundingClientRect().bottom + 'px';
+  };
   hamburger.addEventListener('click', () => {
     const open = navLinks.classList.toggle('open');
     hamburger.classList.toggle('open', open);
     hamburger.setAttribute('aria-expanded', String(open));
     document.body.classList.toggle('nav-open', open);
+    if (open) positionMenu();
   });
+  window.addEventListener('resize', () => {
+    if (navLinks.classList.contains('open')) positionMenu();
+  }, { passive: true });
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
     navLinks.classList.remove('open');
     hamburger.classList.remove('open');
