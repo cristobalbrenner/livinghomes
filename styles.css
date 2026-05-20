@@ -913,16 +913,23 @@ footer.foot {
   /* Page peels away: right edge recedes, left stays — reveals right-side menu */
   #page {
     transform-origin: left center;
+    -webkit-transform-origin: left center;
+    /* Explicit identity state — iOS needs both endpoints to interpolate 3D correctly */
+    transform: perspective(1200px) rotateY(0deg) translateX(0%) scale(1);
+    -webkit-transform: perspective(1200px) rotateY(0deg) translateX(0%) scale(1);
     transition: transform 0.55s cubic-bezier(0.23, 1, 0.32, 1),
+                -webkit-transform 0.55s cubic-bezier(0.23, 1, 0.32, 1),
                 border-radius 0.55s cubic-bezier(0.23, 1, 0.32, 1),
                 box-shadow 0.55s cubic-bezier(0.23, 1, 0.32, 1);
     min-height: 100vh;
-    overflow: hidden;
+    /* overflow: hidden REMOVED — kills 3D transforms on iOS Safari */
   }
   body.nav-open #page {
     transform: perspective(1200px) rotateY(-15deg) translateX(-6%) scale(0.9);
+    -webkit-transform: perspective(1200px) rotateY(-15deg) translateX(-6%) scale(0.9);
     border-radius: 14px;
     box-shadow: 20px 0 70px rgba(0,0,0,0.55);
+    overflow: hidden; /* only clip during the tilt, not always */
   }
 
   /* Semi-transparent overlay on tilted page — tap to close */

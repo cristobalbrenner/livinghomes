@@ -836,46 +836,48 @@ if (quoteForm) {
 const hamburger = document.getElementById('navHamburger');
 const navLinks  = document.getElementById('navLinks');
 const page      = document.getElementById('page');
+
 if (hamburger && navLinks) {
+  let _savedScrollY = 0;
+
+  // iOS Safari ignores overflow:hidden on body — must use position:fixed trick
+  const lockScroll = () => {
+    _savedScrollY = window.scrollY;
+    document.body.style.position  = 'fixed';
+    document.body.style.top       = `-${_savedScrollY}px`;
+    document.body.style.width     = '100%';
+  };
+
+  const unlockScroll = () => {
+    document.body.style.position = '';
+    document.body.style.top      = '';
+    document.body.style.width    = '';
+    window.scrollTo(0, _savedScrollY);
+  };
+
   const closeMenu = () => {
     navLinks.classList.remove('open');
     hamburger.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('nav-open');
+    unlockScroll();
   };
+
   hamburger.addEventListener('click', () => {
     const open = navLinks.classList.toggle('open');
     hamburger.classList.toggle('open', open);
     hamburger.setAttribute('aria-expanded', String(open));
     document.body.classList.toggle('nav-open', open);
+    open ? lockScroll() : unlockScroll();
   });
-  /* tap the tilted page to close */
+
   if (page) page.addEventListener('click', () => {
     if (navLinks.classList.contains('open')) closeMenu();
   });
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    closeMenu();
-  }));
-}
 
-const bbClose = document.getElementById('bbClose');
-const bb      = document.getElementById('bookingBanner');
-if (bbClose && bb) {
-  if (sessionStorage.getItem('bb-dismissed') === '1') bb.style.display = 'none';
-  bbClose.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    bb.style.display = 'none';
-    sessionStorage.setItem('bb-dismissed', '1');
-  });
-}
-
-const mbChat = document.getElementById('mbChat');
-if (mbChat) {
-  mbChat.addEventListener('click', () => {
-    const launcher = document.getElementById('chatLauncher');
-    if (launcher) launcher.click();
-  });
+  navLinks.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', closeMenu)
+  );
 }
 
 /* ============================================================
